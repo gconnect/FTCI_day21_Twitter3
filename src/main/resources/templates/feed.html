@@ -10,6 +10,16 @@
   <div class="container-fluid">
     <div th:replace="fragments/navbar"></div>
     <h2>Tweets</h2>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link tag" th:classappend="${filter == 'all' ? 'active' : ''}"
+          href="/tweets">All</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link tag" th:classappend="${filter == 'following' ? 'active' : ''}"
+        href="/tweets?filter=following">Following</a>
+      </li>
+    </ul>
     <div class="list-group" th:each="tweet:${tweetList}">
       <div class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
@@ -18,13 +28,16 @@
               @<span th:text="${tweet.user.username}"></span>
             </a>
           </h5>
-          <small>Tweeted: <span th:text="${#dates.format(tweet.createdAt, 'M/d/yyyy')}"></span></small>
+          <small>Tweeted: <span th:text="${tweet.date}"></span></small>
         </div>
         <p th:utext="${tweet.message}"></p>
       </div>
     </div>
-    <div th:if="${#lists.isEmpty(tweetList)}">
+    <div th:if="${#lists.isEmpty(tweetList) and filter == 'all'}">
       <h3>No tweets have been created yet</h3>
+    </div>
+    <div th:if="${#lists.isEmpty(tweetList) and filter == 'following'}">
+      <h3>No tweets have been created by those you're following</h3>
     </div>
   </div>
   <script th:replace="fragments/scripts"></script>
