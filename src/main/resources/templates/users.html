@@ -60,14 +60,11 @@
         </div>
       </div>
     </div>
-    <div th:if="${#lists.isEmpty(users) and filter == 'all'}">
-      <h3>No tweets have been created yet</h3>
-    </div>
     <div th:if="${#lists.isEmpty(users) and filter == 'following'}">
-      <h3>No tweets have been created by those you're following</h3>
+      <h3>You are not following anyone</h3>
     </div>
     <div th:if="${#lists.isEmpty(users) and filter == 'followers'}">
-      <h3>No tweets have been created by your followers</h3>
+      <h3>You don't have any followers</h3>
     </div>
   </div>
   <script th:replace="fragments/scripts"></script>
