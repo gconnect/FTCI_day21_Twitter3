@@ -11,10 +11,10 @@
     <div th:replace="fragments/navbar"></div>
     <br/>
     <form th:if="${!following && !isSelfPage}" th:action="@{/follow/} + ${user.username}" method="post">
-      <button style="float: right;" type="Submit" class="btn btn-lg btn-primary">Follow</button>
+      <button style="float: right;" type="Submit" class="btn btn-md btn-primary">Follow</button>
     </form>
     <form th:if="${following && !isSelfPage}" th:action="@{/unfollow/} + ${user.username}" method="post">
-      <button style="float: right;" type="Submit" class="btn btn-lg btn-primary unfollow_btn">Following</button>
+      <button style="float: right;" type="Submit" class="btn btn-md btn-primary unfollow_btn">Following</button>
     </form>
     <h2>
       Profile for <span th:text="${user.firstName}"></span>
@@ -29,12 +29,13 @@
       <div class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
           <h5>
-            <span style="color: #1da1f2;" class="username" th:href="@{/users/} + ${tweet.user.username}">
+            <span style="color: #1da1f2;" class="username" 
+              th:href="@{/users/} + ${tweet.user.username}">
               <i class="fab fa-twitter"></i>
               @<span th:text="${tweet.user.username}"></span>
             </span>
           </h5>
-          <small>Tweeted: <span th:text="${#dates.format(tweet.createdAt, 'M/d/yyyy')}"></span></small>
+          <small>Tweeted: <span th:text="${tweet.date}"></span></small>
         </div>
         <p class="mb-1" th:utext="${tweet.message}"></p>
       </div>
