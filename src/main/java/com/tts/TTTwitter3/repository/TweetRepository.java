@@ -1,0 +1,16 @@
+package com.tts.TTTwitter3.repository;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.tts.TTTwitter3.model.Tweet;
+import com.tts.TTTwitter3.model.User;
+
+@Repository
+public interface TweetRepository extends CrudRepository<Tweet, Long> {
+  public List<Tweet> findAllByOrderByCreatedAtDesc();
+  public List<Tweet> findAllByUserOrderByCreatedAtDesc(User user);
+  public List<Tweet> findAllByUserInOrderByCreatedAtDesc(List<User> users);
+}
